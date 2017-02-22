@@ -3,8 +3,8 @@
 
 Puppet::Functions.create_function(:deprecation) do
   dispatch :deprecation do
-    param 'String', :key
-    param 'String', :message
+    param _('String'), :key
+    param _('String'), :message
   end
 
   def deprecation(key, message)
@@ -12,16 +12,16 @@ Puppet::Functions.create_function(:deprecation) do
       stacktrace = Puppet::Pops::PuppetStack.stacktrace()
       file = stacktrace[0]
       line = stacktrace[1]
-      message = "#{message} at #{file}:#{line}"
+      message = _("#{message} at #{file}:#{line}")
     end
     # depending on configuration setting of strict
     case Puppet.settings[:strict]
     when :off
       # do nothing
     when :error
-      fail("deprecation. #{key}. #{message}")
+      fail(_("deprecation. #{key}. #{message}"))
     else
-      unless ENV['STDLIB_LOG_DEPRECATIONS'] == 'false'
+      unless ENV['STDLIB_LOG_DEPRECATIONS'] == _('false')
         Puppet.deprecation_warning(message, key)
       end
     end

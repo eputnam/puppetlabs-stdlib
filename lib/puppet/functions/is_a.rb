@@ -21,8 +21,8 @@
 #
 Puppet::Functions.create_function(:is_a) do
   dispatch :is_a do
-    param 'Any', :value
-    param 'Type', :type
+    param _('Any'), :value
+    param _('Type'), :type
   end
 
   def is_a(value, type)

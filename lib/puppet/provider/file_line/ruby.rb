@@ -52,10 +52,10 @@ Puppet::Type.type(:file_line).provide(:ruby) do
     match_count = count_matches(match_regex)
 
     if match_count > 1 && resource[:multiple].to_s != 'true'
-     raise Puppet::Error, "More than one line in file '#{resource[:path]}' matches pattern '#{resource[:match]}'"
+     raise Puppet::Error, trans("More than one line in file '#{resource[:path]}' matches pattern '#{resource[:match]}'")
     end
 
-    File.open(resource[:path], 'w') do |fh|
+    File.open(resource[:path], trans('w')) do |fh|
       lines.each do |l|
         fh.puts(match_regex.match(l) ? resource[:line] : l)
         if (match_count == 0 and regex_after)
@@ -77,10 +77,10 @@ Puppet::Type.type(:file_line).provide(:ruby) do
     count = count_matches(regex)
 
     if count > 1 && resource[:multiple].to_s != 'true'
-      raise Puppet::Error, "#{count} lines match pattern '#{resource[:after]}' in file '#{resource[:path]}'.  One or no line must match the pattern."
+      raise Puppet::Error, trans("#{count} lines match pattern '#{resource[:after]}' in file '#{resource[:path]}'.  One or no line must match the pattern.")
     end
 
-    File.open(resource[:path], 'w') do |fh|
+    File.open(resource[:path], trans('w')) do |fh|
       lines.each do |l|
         fh.puts(l)
         if regex.match(l) then
@@ -101,18 +101,18 @@ Puppet::Type.type(:file_line).provide(:ruby) do
   def handle_destroy_with_match
     match_count = count_matches(match_regex)
     if match_count > 1 && resource[:multiple].to_s != 'true'
-     raise Puppet::Error, "More than one line in file '#{resource[:path]}' matches pattern '#{resource[:match]}'"
+     raise Puppet::Error, trans("More than one line in file '#{resource[:path]}' matches pattern '#{resource[:match]}'")
     end
 
     local_lines = lines
-    File.open(resource[:path],'w') do |fh|
+    File.open(resource[:path],trans('w')) do |fh|
       fh.write(local_lines.reject{|l| match_regex.match(l) }.join(''))
     end
   end
 
   def handle_destroy_line
     local_lines = lines
-    File.open(resource[:path],'w') do |fh|
+    File.open(resource[:path],trans('w')) do |fh|
       fh.write(local_lines.reject{|l| l.chomp == resource[:line] }.join(''))
     end
   end
@@ -122,7 +122,7 @@ Puppet::Type.type(:file_line).provide(:ruby) do
   #
   # @api private
   def append_line
-    File.open(resource[:path], 'w') do |fh|
+    File.open(resource[:path], trans('w')) do |fh|
       lines.each do |l|
         fh.puts(l)
       end

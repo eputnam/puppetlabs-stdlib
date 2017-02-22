@@ -15,11 +15,11 @@
 class Facter::Util::DotD
   require 'yaml'
 
-  def initialize(dir="/etc/facts.d", cache_file=File.join(Puppet[:libdir], "facts_dot_d.cache"))
+  def initialize(dir="/etc/facts.d", cache_file=File.join(Puppet[:libdir], _("facts_dot_d.cache")))
     @dir = dir
     @cache_file = cache_file
     @cache = nil
-    @types = {".txt" => :txt, ".json" => :json, ".yaml" => :yaml}
+    @types = {_(".txt") => :txt, _(".json") => :json, _(".yaml") => :yaml}
   end
 
   def entries
@@ -49,7 +49,7 @@ class Facter::Util::DotD
       end
     end
   rescue StandardError => e
-    Facter.warn("Failed to handle #{file} as text facts: #{e.class}: #{e}")
+    Facter.warn(_("Failed to handle #{file} as text facts: #{e.class}: #{e}"))
   end
 
   def json_parser(file)
@@ -66,7 +66,7 @@ class Facter::Util::DotD
       end
     end
   rescue StandardError => e
-    Facter.warn("Failed to handle #{file} as json facts: #{e.class}: #{e}")
+    Facter.warn(_("Failed to handle #{file} as json facts: #{e.class}: #{e}"))
   end
 
   def yaml_parser(file)
@@ -78,7 +78,7 @@ class Facter::Util::DotD
       end
     end
   rescue StandardError => e
-    Facter.warn("Failed to handle #{file} as yaml facts: #{e.class}: #{e}")
+    Facter.warn(_("Failed to handle #{file} as yaml facts: #{e.class}: #{e}"))
   end
 
   def script_parser(file)
@@ -107,13 +107,13 @@ class Facter::Util::DotD
       end
     end
   rescue StandardError => e
-    Facter.warn("Failed to handle #{file} as script facts: #{e.class}: #{e}")
+    Facter.warn(_("Failed to handle #{file} as script facts: #{e.class}: #{e}"))
     Facter.debug(e.backtrace.join("\n\t"))
   end
 
   def cache_save!
     cache = load_cache
-    File.open(@cache_file, "w", 0600) { |f| f.write(YAML.dump(cache)) }
+    File.open(@cache_file, _("w"), 0600) { |f| f.write(YAML.dump(cache)) }
   rescue
   end
 
@@ -145,7 +145,7 @@ class Facter::Util::DotD
   end
 
   def cache_time(file)
-    meta = file + ".ttl"
+    meta = file + _(".ttl")
 
     return File.read(meta).chomp.to_i
   rescue
@@ -170,9 +170,9 @@ class Facter::Util::DotD
   def create
     entries.each do |fact|
       type = fact_type(fact)
-      parser = "#{type}_parser"
+      parser = _("#{type}_parser")
 
-      if respond_to?("#{type}_parser")
+      if respond_to?(_("#{type}_parser"))
         Facter.debug("Parsing #{fact} using #{parser}")
 
         send(parser, fact)
@@ -193,8 +193,8 @@ if mdata
 
       # Windows has a different configuration directory that defaults to a vendor
       # specific sub directory of the %COMMON_APPDATA% directory.
-      if Dir.const_defined? 'COMMON_APPDATA' then
-        windows_facts_dot_d = File.join(Dir::COMMON_APPDATA, 'PuppetLabs', 'facter', 'facts.d')
+      if Dir.const_defined? _('COMMON_APPDATA') then
+        windows_facts_dot_d = File.join(Dir::COMMON_APPDATA, _('PuppetLabs'), _('facter'), _('facts.d'))
         Facter::Util::DotD.new(windows_facts_dot_d).create
       end
     end

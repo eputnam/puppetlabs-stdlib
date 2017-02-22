@@ -9,7 +9,7 @@ module Facter
       # directory of a module.
       def self.with_puppet
         begin
-          Module.const_get("Puppet")
+          Module.const_get(_("Puppet"))
         rescue NameError
           nil
         else
