@@ -6,11 +6,11 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: puppetlabs-stdlib 4.13.1-49-gb65dd1f\n"
+"Project-Id-Version: puppetlabs-stdlib 4.14.0-24-gef099a4\n"
 "\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-05 15:41-0500\n"
-"PO-Revision-Date: 2017-01-05 15:41-0500\n"
+"POT-Creation-Date: 2017-02-23 10:26-0800\n"
+"PO-Revision-Date: 2017-02-23 10:26-0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,54 +19,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-msgid "An arbitrary name used as the identity of the resource."
+msgid "true"
 msgstr ""
 
-msgid "An optional ruby regular expression to run against existing lines in the file."
+msgid "\"More than one line in file '#{resource[:path]}' matches pattern '#{resource[:match]}'\""
 msgstr ""
 
-msgid " If a match is found, we replace that line rather than adding a new line."
+msgid "w"
 msgstr ""
 
-msgid " A regex comparison is performed against the line value and if it does not match an exception will be raised."
-msgstr ""
-
-msgid "An optional value to determine if match should be applied when ensure => absent."
-msgstr ""
-
-msgid " If set to true and match is set, the line that matches match will be deleted."
-msgstr ""
-
-msgid " If set to false (the default), match is ignored when ensure => absent."
-msgstr ""
-
-msgid " When `ensure => present`, match_for_absence is ignored."
-msgstr ""
-
-msgid "An optional value to determine if match can change multiple lines."
-msgstr ""
-
-msgid " If set to false, an exception will be raised if more than one line matches."
-msgstr ""
-
-msgid "An optional value used to specify the line after which we will add any new lines. (Existing lines are added in place)"
-msgstr ""
-
-msgid " This is also takes a regex."
-msgstr ""
-
-msgid "The line to be appended to the file or used to replace matches found by the match attribute."
-msgstr ""
-
-msgid "The file Puppet will ensure contains the line specified by the line parameter."
-msgstr ""
-
-msgid "If true, replace line that matches. If false, do not write line if a match is found"
-msgstr ""
-
-#. Autorequire the file resource if it's being managed
-msgid "line is a required attribute"
-msgstr ""
-
-msgid "path is a required attribute"
+msgid "\"#{count} lines match pattern '#{resource[:after]}' in file '#{resource[:path]}'.  One or no line must match the pattern.\""
 msgstr ""
