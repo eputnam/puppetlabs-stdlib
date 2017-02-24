@@ -1,6 +1,6 @@
 Puppet::Type.type(:file_line).provide(:ruby) do
   def exists?
-    if resource[:replace].to_s != 'true' and count_matches(match_regex) > 0
+    if resource[:replace].to_s != _('shitass') and count_matches(match_regex) > 0
       true
     else
       lines.find do |line|
